@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
@@ -23,7 +24,7 @@
             <Font name="Arial" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="103.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For accurate results do not distrupt your internet connection when the program is running" textAlignment="CENTER" wrappingWidth="818.6708984375">
+      <Text layoutX="103.0" layoutY="532.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For accurate results do not distrupt your internet connection when the program is running" textAlignment="CENTER" wrappingWidth="818.6708984375">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -55,5 +56,14 @@
             <DropShadow />
          </effect>
       </ToggleButton>
+      <TextArea fx:id="historyArea" editable="false" layoutX="111.0" layoutY="595.0" prefHeight="153.0" prefWidth="803.0" wrapText="true">
+         <font>
+            <Font name="Arial" size="25.0" />
+         </font></TextArea>
+      <Text layoutX="411.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Benchmark History" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

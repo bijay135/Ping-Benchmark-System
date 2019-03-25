@@ -1,6 +1,7 @@
 package Engine;
 
 import Interface.GraphWindow;
+import Interface.InitialWindowController;
 import javafx.application.Application;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +21,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
         
-        Parent initialWindow = FXMLLoader.load(getClass().getResource("/Interface/InitialWindow.fxml"));
+        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/Interface/InitialWindow.fxml"));
+        Parent initialWindow = loader1.load();
+        InitialWindowController controller1 = loader1.getController();
+        controller1.loadHistory();
         Scene scene1 = new Scene(initialWindow,1024,768);
         
         stage.toFront();

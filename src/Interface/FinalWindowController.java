@@ -1,10 +1,14 @@
 package Interface;
 
+import Database.ConnectionUtility;
 import Engine.Data;
 import Engine.Index;
 import Engine.Main;
 import Engine.Variance;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -27,6 +31,7 @@ public class FinalWindowController {
         Image image = new Image(file.toURI().toString());
         lineChartImage.setImage(image);
     }
+    
     public void setTextField() {
         varianceResult.setText(""+Variance.getVariance()+"");
         ratingResult.setText(""+Index.getScore()+"/10");
@@ -35,6 +40,21 @@ public class FinalWindowController {
     public void setTextArea(){
         Index.scoreDetails();
         detailsArea.appendText(Index.d1+Index.d2+Index.d3+Index.d4+Index.d5+Index.d6);
+    }
+    
+    public void saveHistory() throws Exception{
+        Connection con  = ConnectionUtility.getConnection();
+        
+        Timestamp timestamp = new Timestamp(1000*(System.currentTimeMillis()/1000));
+
+        PreparedStatement ps = con.prepareStatement("Insert into history(time,variance,rating) values (?,?,?)");
+        ps.setTimestamp(1,timestamp);
+        ps.setInt(2,Variance.getVariance());
+        ps.setInt(3,Index.getScore());
+        ps.executeUpdate();
+        //System.out.println("Successfully Inserted");  For Debugging
+        
+        ConnectionUtility.closeConnection();
     }
 
     @FXML

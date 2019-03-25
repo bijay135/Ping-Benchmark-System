@@ -1,14 +1,20 @@
 package Interface;
 
+import Database.ConnectionUtility;
 import Engine.Main;
 import Engine.Server;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 
 public class InitialWindowController extends GraphWindow {      
     @FXML
     private ToggleGroup Servers;
+    @FXML
+    private TextArea historyArea;
     
     @FXML
     private void server1Button(ActionEvent event) {
@@ -54,5 +60,19 @@ public class InitialWindowController extends GraphWindow {
             Main.serverErrorAlert.setContentText("Check your internet connection or try a different server");
             Main.serverErrorAlert.show();
         }
-    }   
+    }
+    
+    public void loadHistory() throws Exception{
+        Connection con  = ConnectionUtility.getConnection();
+        
+        ResultSet rs = con.createStatement().executeQuery("select * from history");
+        while (rs.next()) {
+            historyArea.appendText(rs.getString(1)+"  |  ");
+            historyArea.appendText("Ping Variance: "+rs.getString(2)+"  |  ");
+            historyArea.appendText("Stability Rating: "+rs.getString(3)+"/10"+"\n");
+        }
+        //System.out.println("Successfully Retrived");  For Debugging
+        
+        ConnectionUtility.closeConnection();
+    }
 }

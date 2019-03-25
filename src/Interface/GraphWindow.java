@@ -83,13 +83,14 @@ public class GraphWindow extends FinalWindowController {
         ImageIO.write(SwingFXUtils.fromFXImage(image,null),"png",file);
     }
     
-    public void finalWindowResources() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interface/FinalWindow.fxml"));
-        Parent finalWindow = loader.load();
-        FinalWindowController controller = loader.getController();
-        controller.loadChartImage();
-        controller.setTextField();
-        controller.setTextArea();
+    public void finalWindowResources() throws Exception{
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/Interface/FinalWindow.fxml"));
+        Parent finalWindow = loader2.load();
+        FinalWindowController controller2 = loader2.getController();
+        controller2.loadChartImage();
+        controller2.setTextField();
+        controller2.setTextArea();
+        controller2.saveHistory();
         Main.scene3 = new Scene(finalWindow,1024,768);
     }
     
